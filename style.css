@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: 'VT323', sans-serif;
+    background: linear-gradient(135deg, #ff9dea, #99ffff);
+    color: #000;
+    overflow-x: hidden;
+  }
+  
+  .bg-noise {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  
+  header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .challenge-box {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px dashed #000;
+    border-radius: 16px;
+    text-align: center;
+  }
+  
+  .code-snippet {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .blank {
+    background: #000;
+    color: #fff;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+  
+  input[type="text"] {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border: 2px solid #000;
+    border-radius: 8px;
+    margin-right: 0.5rem;
+  }
+  
+  button {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .response-text {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+  
