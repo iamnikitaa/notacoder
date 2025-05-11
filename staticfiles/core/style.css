@@ -1,0 +1,222 @@
+/* static/css/style.css */
+
+/* --- Import Google Font (Example: Press Start 2P & Bungee) --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bungee&display=swap');
+
+/* --- Define CSS Variables (Colors & Fonts) --- */
+:root {
+    --bg-color: #1a0a3d; /* Deep purple */
+    --text-color: #f0f0f0; /* Off-white */
+    --primary-neon: #ff1493; /* Hot pink */
+    --secondary-neon: #00ffff; /* Cyan */
+    --accent-neon: #aeff00; /* Lime */
+
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-display: 'Bungee', cursive; /* For headings */
+    --font-body: sans-serif; /* Fallback or standard text */
+
+    /* Glitch animation variables */
+    --glitch-skew: 5deg;
+}
+
+/* --- Base Styles --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body); /* Default font */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll from glitch */
+    position: relative; /* Needed for pseudo-element glitch */
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display); /* Use display font for headers */
+    color: var(--secondary-neon); /* Cyan headers */
+    text-shadow: 0 0 5px var(--secondary-neon), 0 0 10px var(--primary-neon); /* Neon glow */
+}
+
+a {
+    color: var(--primary-neon);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-neon);
+    text-shadow: 0 0 8px var(--accent-neon);
+}
+
+/* --- Layout & Components --- */
+.container {
+    max-width: 960px; /* Or your preferred width */
+    margin: 2rem auto;
+    padding: 0 1rem;
+    position: relative; /* Ensure content is above potential pseudo-elements */
+    z-index: 2;
+}
+
+/* Style Navbar (Example assuming Bootstrap structure) */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent black */
+    border-bottom: 2px solid var(--primary-neon);
+    font-family: var(--font-pixel); /* Pixel font for nav */
+}
+.navbar .navbar-brand {
+    color: var(--accent-neon) !important;
+    font-size: 1.5em; /* Adjust as needed */
+    text-shadow: 0 0 5px var(--accent-neon);
+}
+.navbar .nav-link {
+     color: var(--secondary-neon) !important;
+}
+.navbar .nav-link:hover {
+     color: var(--primary-neon) !important;
+}
+
+
+/* Style Buttons */
+.btn {
+    font-family: var(--font-pixel); /* Pixel font for buttons */
+    background-color: transparent;
+    border: 2px solid var(--primary-neon);
+    color: var(--primary-neon);
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-shadow: 0 0 3px var(--primary-neon);
+}
+
+.btn:hover {
+    background-color: var(--primary-neon);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-neon);
+    text-shadow: none;
+}
+/* Specific button types */
+.btn-primary {
+     border-color: var(--primary-neon);
+     color: var(--primary-neon);
+}
+.btn-primary:hover {
+     background-color: var(--primary-neon);
+     color: var(--bg-color);
+     box-shadow: 0 0 15px var(--primary-neon);
+}
+.btn-secondary {
+     border-color: var(--secondary-neon);
+     color: var(--secondary-neon);
+}
+.btn-secondary:hover {
+     background-color: var(--secondary-neon);
+     color: var(--bg-color);
+     box-shadow: 0 0 15px var(--secondary-neon);
+}
+
+/* Style Cards / Challenge List Items */
+.list-group-item, .card {
+    background-color: rgba(0, 0, 0, 0.3); /* Darker transparent */
+    border: 1px solid var(--secondary-neon);
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.list-group-item h5, .card-header {
+    color: var(--accent-neon); /* Lime green titles */
+    font-family: var(--font-display);
+}
+.badge {
+    background-color: var(--primary-neon) !important; /* Ensure badge color overrides bootstrap */
+    color: var(--bg-color) !important;
+    font-family: var(--font-pixel);
+}
+
+/* Style Code Blocks */
+.code-block {
+    background-color: #111; /* Very dark grey */
+    color: var(--accent-neon); /* Lime code text */
+    padding: 1em;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace; /* Standard monospace */
+    white-space: pre-wrap;
+    border: 1px dashed var(--secondary-neon);
+    overflow-x: auto; /* Add scroll if needed */
+}
+
+/* Style Form Inputs */
+.form-control, .form-select {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--secondary-neon);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+}
+.form-control:focus {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: var(--primary-neon);
+    color: var(--text-color);
+    box-shadow: 0 0 10px var(--primary-neon);
+    outline: none;
+}
+.form-label {
+    color: var(--secondary-neon);
+    font-family: var(--font-pixel);
+}
+
+
+/* --- Glitch Background Effect (using pseudo-elements) --- */
+
+body::before,
+body::after {
+    content: ''; /* Crucial for pseudo-elements */
+    position: absolute; /* Position relative to body */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color); /* Use the same background */
+    z-index: 1; /* Place behind content (z-index: 2 on .container) but above default body */
+    overflow: hidden; /* Prevent pseudo-elements from causing scroll */
+    pointer-events: none; /* Make them non-interactive */
+}
+
+/* Animation for the ::before pseudo-element */
+body::before {
+    animation: glitch-top 1.5s linear infinite alternate;
+     /* Slightly different timing/variation */
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); /* Only affect top part */
+}
+
+/* Animation for the ::after pseudo-element */
+body::after {
+    animation: glitch-bottom 1.2s linear infinite alternate-reverse;
+    /* Slightly different timing/variation */
+    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%); /* Only affect bottom part */
+}
+
+
+/* Glitch Keyframes */
+@keyframes glitch-top {
+    0%, 100% { transform: translate(0, 0); opacity: 1; }
+    10% { transform: translate(-5px, -3px) skewX(var(--glitch-skew)); }
+    20% { transform: translate(3px, 2px) skewX(calc(-1 * var(--glitch-skew))); }
+    30% { transform: translate(-7px, 4px) skewX(var(--glitch-skew)); }
+    40% { transform: translate(4px, -2px) skewX(calc(-1 * var(--glitch-skew))); }
+    50% { transform: translate(0, 0); opacity: 0.8; } /* Slight flicker */
+    60% { transform: translate(-5px, 5px) skewX(var(--glitch-skew)); }
+    70% { transform: translate(2px, -3px) skewX(calc(-1 * var(--glitch-skew))); }
+    80% { transform: translate(-6px, -2px) skewX(var(--glitch-skew)); }
+    90% { transform: translate(5px, 3px) skewX(calc(-1 * var(--glitch-skew))); }
+}
+
+@keyframes glitch-bottom {
+    0%, 100% { transform: translate(0, 0); opacity: 1; }
+    15% { transform: translate(4px, 2px) skewX(var(--glitch-skew)); }
+    25% { transform: translate(-3px, -4px) skewX(calc(-1 * var(--glitch-skew))); }
+    35% { transform: translate(6px, -1px) skewX(var(--glitch-skew)); }
+    45% { transform: translate(-4px, 3px) skewX(calc(-1 * var(--glitch-skew))); }
+    55% { transform: translate(0, 0); opacity: 0.7; }
+    65% { transform: translate(5px, -5px) skewX(var(--glitch-skew)); }
+    75% { transform: translate(-2px, 2px) skewX(calc(-1 * var(--glitch-skew))); }
+    85% { transform: translate(7px, 1px) skewX(var(--glitch-skew)); }
+    95% { transform: translate(-5px, -3px) skewX(calc(-1 * var(--glitch-skew))); }
+}

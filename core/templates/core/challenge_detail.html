@@ -1,0 +1,94 @@
+{% extends "core/index.html" %}
+{% load static %}
+
+{% block title %}{{ challenge.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="challenge-detail mb-4">
+        <h1 class="text-center">{{ challenge.title }}</h1>
+        <p class="lead text-center text-muted">
+            {{ challenge.language.name }} | Difficulty: {{ challenge.difficulty }} | {{ challenge.points_reward }} pts
+        </p>
+        <hr>
+    </div>
+
+    <div class="challenge-container">
+        <!-- Challenge Description -->
+        <div class="challenge-description-section">
+            <div class="card">
+                <div class="card-header">Description</div>
+                <div class="card-body">
+                    {{ challenge.description|linebreaksbr }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Form -->
+        <div class="challenge-form-section">
+            <div class="card">
+                <div class="card-header">Your Solution</div>
+                <div class="card-body">
+                    <pre><code>{{ challenge.code_template }}</code></pre>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary w-100">Submit Answer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results/Hint Section -->
+        <div class="challenge-result-section">
+            <div class="card">
+                <div class="card-header">Results</div>
+                <div class="card-body">
+                    {% if not has_submitted %}
+                        <div class="alert alert-secondary" role="alert">
+                            No result yet... but you're about to slay this.
+                        </div>
+                    {% elif is_correct %}
+                        <div class="alert alert-success" role="alert">
+                            🎉 Correct! You earned {{ challenge.points_reward }} points!
+                        </div>
+                        <div class="mt-4">
+                            <h5>Completed Code:</h5>
+                            <pre><code class="language-{{ challenge.language.slug }}">{{ full_code }}</code></pre>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            ❌ Not quite right. Keep trying!
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+{% if is_correct %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        try {
+            confetti({ origin: { x: 0, y: 0 }, angle: 60, spread: 100, particleCount: 50 });
+            confetti({ origin: { x: 1, y: 0 }, angle: 120, spread: 100, particleCount: 50 });
+            confetti({ origin: { x: 0, y: 1 }, angle: -60, spread: 100, particleCount: 50 });
+            confetti({ origin: { x: 1, y: 1 }, angle: -120, spread: 100, particleCount: 50 });
+            confetti({ origin: { x: 0.5, y: 0.5 }, spread: 360, particleCount: 100 });
+        } catch (e) {
+            console.error('Confetti error:', e);
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "core/index.html" %}
+{% load static %}
+
+{% block title %}Challenges{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Challenges</h1>
+
+    {% if guest %}
+        <div class="alert alert-info text-center" role="alert">
+            You're viewing as a guest. <a href="{% url 'login' %}">Login</a> to save your progress and earn rewards!
+        </div>
+    {% endif %}
+
+    {% if challenges %}
+        <div class="list-group">
+            {% for challenge in challenges %}
+                {% if guest and challenge.requires_login %}
+                    <div class="list-group-item disabled mb-3">
+                        <div class="challenge-header">
+                            <h5 class="mb-0 challenge-title text-muted">
+                                {{ challenge.title }} <small>(Login required)</small>
+                            </h5>
+                            <div class="challenge-badges">
+                                <span class="badge bg-secondary">{{ challenge.language.name }}</span>
+                                <span class="badge bg-warning text-dark">{{ challenge.get_difficulty_display }}</span>
+                                <span class="badge bg-info text-dark">{{ challenge.points_reward }} pts</span>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'challenge_detail' challenge.id %}" class="list-group-item list-group-item-action mb-3">
+                        <div class="challenge-header">
+                            <h5 class="mb-0 challenge-title">{{ challenge.title }}</h5>
+                            <div class="challenge-badges">
+                                <span class="badge bg-secondary">{{ challenge.language.name }}</span>
+                                <span class="badge bg-warning text-dark">{{ challenge.get_difficulty_display }}</span>
+                                <span class="badge bg-info text-dark">{{ challenge.points_reward }} pts</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No challenges available yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
