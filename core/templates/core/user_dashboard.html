@@ -1,0 +1,10 @@
+{% extends "core/index.html" %}
+
+{% block title %}Welcome, {{ user.name }} - notacoder{% endblock %}
+
+{% block content %}
+<div class="dashboard text-center">
+    <h1 class="mb-3">Hello, {{ user.name }}!</h1>
+    <a href="{% url 'challenge_list' %}" class="btn btn-success mt-4">Start a Challenge</a>
+</div>
+{% endblock %}

@@ -1,50 +1,72 @@
-/* static/css/style.css - Pastel Clean Gen Z Vibe */
+/* ======================================= */
+/*         GOOGLE FONTS & VARIABLES        */
+/* ======================================= */
 
 /* --- Import Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Bangers&display=swap');
 
 /* --- Define Pastel Variables --- */
 :root {
-    --pastel-light-blue: #b9cbe0d0;  /* Soft light blue background */
-    --pastel-purple: #a58acb; /* Borders, accents */
-    --pastel-pink: #0b0b0b;   /* Primary accent, links, buttons */
-    --pastel-orange: #ffc9a3; /* Button gradient, header accents */
-    --pastel-yellow: #fbe7b4; /* Less used accent */
-    --pastel-cyan: #ffffff;   /* Secondary accent */
-    --text-color: #000000;    /* Main text */
-    --button-hover-color: #a58acb; /* Button hover color */
+    --pastel-light-blue: #b9cbe0d0;
+    --pastel-purple: #a58acb;
+    --pastel-pink: #0b0b0b;
+    --pastel-orange: #ffc9a3;
+    --pastel-yellow: #fbe7b4;
+    --pastel-cyan: #ffffff;
+    --text-color: #000000;
+    --button-hover-color: #a58acb;
 
-    /* Fonts */
-    --font-heading: 'Bangers', sans-serif; /* For headings */
-    --font-body: 'Poppins', sans-serif;   /* For body text */
-    --font-code: 'Courier New', Courier, monospace; /* For code blocks/inputs */
+    --font-heading: 'Bangers', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-code: 'Courier New', Courier, monospace;
 }
 
-/* --- Base Styles --- */
+/* ======================================= */
+/*              BASE STYLING              */
+/* ======================================= */
+
 body {
-    background-color: var(--pastel-light-blue); /* Light pastel background */
+    background-color: var(--pastel-light-blue);
     color: var(--text-color);
     font-family: var(--font-body);
     margin: 0;
-    padding: 0;
+    padding: 0 0 2rem 0;
     position: relative;
     overflow: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-size: 24px;
-    overflow-y: auto !important;  /* Override the hidden overflow */
-    padding-bottom: 2rem;  /* Add some bottom padding */
+    overflow-y: auto !important;
 }
 
-/* Ensure main content area is above background effects */
 main {
     flex-grow: 1;
     position: relative;
     z-index: 2;
 }
 
-/* --- Buttons --- */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading);
+    color: var(--pastel-purple);
+    margin: 10px 0;
+}
+
+p, a {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--pastel-pink);
+}
+
+a:hover {
+    color: var(--pastel-cyan);
+}
+
 button, .btn {
     background-color: var(--pastel-pink);
     color: #fff;
@@ -61,45 +83,49 @@ button:hover, .btn:hover {
     background-color: var(--button-hover-color);
 }
 
-/* --- Text and Headings --- */
-h1, h2, h3, h4, h5 {
-    font-family: var(--font-heading);
-    color: var(--pastel-purple);
-    margin: 10px 0;
-}
-
-p, a {
-    font-family: var(--font-body);
-    color: var(--text-color);
-    font-size: 1.2rem
-}
-
-/* Links */
-a {
-    text-decoration: none;
-    color: var(--pastel-pink);
-}
-
-a:hover {
-    color: var(--pastel-cyan);
-}
-
-/* --- Layout Components --- */
 .container, .container-fluid {
     position: relative;
     z-index: 2;
 }
 
-/* --- Code Blocks --- */
-code {
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 5px 10px;
-    border-radius: 3px;
+/* ======================================= */
+/*              CODE & FORMS              */
+/* ======================================= */
+
+code, pre {
+    background-color: #f8f9fa;
     font-family: var(--font-code);
+    border-radius: 5px;
+    padding: 1rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
 }
 
-/* --- Footer --- */
+code {
+    padding: 5px 10px;
+}
+
+.form-control {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ======================================= */
+/*             FOOTER SECTION             */
+/* ======================================= */
+
 footer {
     background-color: var(--pastel-purple);
     color: #fff;
@@ -110,10 +136,13 @@ footer {
     z-index: 2;
 }
 
-/* Challenge list container styling */
+/* ======================================= */
+/*         CHALLENGE LIST PAGE            */
+/* ======================================= */
+
 .list-group {
-    max-width: 800px; /* Limit width */
-    margin: 0 auto; /* Center the container */
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
 }
 
@@ -124,12 +153,10 @@ footer {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Center challenge list title and content */
 .challenge-content {
     text-align: center;
 }
 
-/* Increase text sizes for different elements */
 h1 {
     font-size: 3rem;
     margin-bottom: 30px;
@@ -149,18 +176,45 @@ p.mb-1 {
     padding: 8px 12px;
 }
 
-/* Challenge detail styling */
+/* ======================================= */
+/*         CHALLENGE DETAIL PAGE          */
+/* ======================================= */
+
 .challenge-detail {
-    max-width: none; /* Remove max-width constraint */
+    max-width: none;
     margin: 0 auto;
     padding: 2rem;
 }
 
+.challenge-detail > * {
+    margin-bottom: 2rem;
+}
+
+.challenge-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 20px;
+}
+
+.challenge-form-section,
+.challenge-result-section,
+.challenge-explanation-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.card,
+.alert-success {
+    height: 100%;
+    margin-bottom: 0;
+}
+
 .card {
-    margin-bottom: 0; /* Remove bottom margin since we're using flex gap */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: 100%; /* Make both boxes the same height */
 }
 
 .card-header {
@@ -175,7 +229,7 @@ p.mb-1 {
 .card-body {
     padding: 1.5rem;
     overflow-y: auto;
-    max-height: calc(100vh - 300px); /* Adjust based on your header height */
+    max-height: calc(100vh - 300px);
 }
 
 .code-block {
@@ -186,19 +240,10 @@ p.mb-1 {
     margin: 15px 0;
 }
 
-/* Center the form elements */
-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
+/* ======================================= */
+/*         ALERTS & FEEDBACK BLOCKS       */
+/* ======================================= */
 
-/* Style form inputs */
-.form-label {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Override Bootstrap alert styling */
 .alert-success {
     background-color: var(--pastel-cyan);
     border: none;
@@ -207,13 +252,10 @@ form {
     margin-top: 2rem;
     padding: 25px;
     color: var(--text-color);
-    height: 100%; /* Make both boxes the same height */
-    margin-bottom: 0; /* Remove bottom margin since we're using flex gap */
     overflow-y: auto;
-    max-height: calc(100vh - 200px); /* Adjust based on your header height */
+    max-height: calc(100vh - 200px);
 }
 
-/* Style the completed code section */
 .alert-success h3,
 .alert-success h4 {
     color: var(--pastel-purple);
@@ -230,69 +272,125 @@ form {
     padding: 20px;
 }
 
-/* Add some spacing between sections */
-.challenge-detail > * {
-    margin-bottom: 2rem;
+/* ======================================= */
+/*            SIGN-IN PAGE STYLES         */
+/* ======================================= */
+
+body.signin-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
 }
 
-/* Add these new styles */
-.challenge-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 2rem;
-}
-
-.challenge-form-section,
-.challenge-result-section,
-.challenge-explanation-section {
-    flex: 1;
-    min-width: 0; /* Prevents flex items from overflowing */
-}
-
-.card, 
-.alert-success {
-    height: 100%;
-    margin-bottom: 0;
-}
-
-.card-body,
-.alert-success {
-    overflow-y: auto;
-    max-height: calc(100vh - 200px);
-}
-
-/* Form styling */
-.form-control {
-    font-family: var(--font-code);
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Code block styling */
-pre {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
-    font-family: var(--font-code);
-}
-
-code {
-    color: var(--text-color);
-    font-size: 0.9rem;
-}
-
-/* Sign-in Page Styles */
-.signin-box {
-    max-width: 400px;
-    margin: 100px auto;
+.signin-container {
+    max-width: 450px;
+    width: 100%;
     padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #b9cbe0d0;
+}
+
+.signin-container h1 {
+    font-family: var(--font-heading);
+    color: var(--pastel-purple);
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+}
+
+.signin-form p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.signin-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.signin-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--pastel-purple);
+    border-radius: 5px;
+    font-family: var(--font-code);
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+
+.signin-form input:focus {
+    outline: none;
+    border-color: var(--pastel-pink);
+    box-shadow: 0 0 5px var(--pastel-purple);
+}
+
+.signin-form button {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.signin-box {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ======================================= */
+/*               DASHBOARD                */
+/* ======================================= */
+
+.dashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ======================================= */
+/*          LOGO & MESSAGES SIDEBAR       */
+/* ======================================= */
+
+.site-logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.messages-sidebar {
+    position: absolute;
+    top: 5rem;
+    left: 2rem;
+    text-align: left;
+}
+
+.messages-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.messages-sidebar .message-item {
+    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border-left: 4px solid var(--pastel-purple);
 }

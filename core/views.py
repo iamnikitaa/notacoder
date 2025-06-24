@@ -16,36 +16,79 @@ def index(request):
     return render(request, 'core/index.html', context)
 
 def choose_access(request):
+    # ... (the start of your view remains the same) ...
+
     if request.method == 'POST':
         form = GuestUserForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            user, created = GuestUser.objects.get_or_create(name=name)
+            magic_word = form.cleaned_data['magic_word']
 
-            # Save user's name in session
-            request.session['guest_name'] = user.name
-            request.session['guest_id'] = user.id
+            try:
+                user = GuestUser.objects.get(name=name)
+                if user.magic_word == magic_word:
+                    # SUCCESSFUL LOGIN
+                    request.session['guest_user_id'] = user.id
+                    messages.success(request, f"Welcome back, {user.name}!")
+                    
+                    # *** THE FIX IS HERE ***
+                    # Redirect to the 'challenge_detail' URL, passing 'challenge_id'.
+                    return redirect('challenge_list')
+                else:
+                    # FAILED LOGIN
+                    messages.error(request, "That's not the right Magic Word for that name.")
+                    return redirect('choose_access')
 
-            # Redirect to challenge list
-            return redirect('challenge_list')
+            except GuestUser.DoesNotExist:
+                # NEW USER SIGN UP
+                user = GuestUser.objects.create(
+                    name=name,
+                    magic_word=magic_word,
+                    current_challenge=1
+                )
+                request.session['guest_user_id'] = user.id
+
+                # *** THE FIX IS HERE TOO ***
+                # Redirect to the 'challenge_detail' URL, passing 'challenge_id'.
+                return redirect('challenge_list')
     else:
         form = GuestUserForm()
-    
+
     return render(request, 'core/choose_access.html', {'form': form})
 
 
+def user_dashboard(request):
+    # THE FIX: Get the correct key from the session.
+    user_id = request.session.get('guest_user_id')
+    
+    # If the user ID isn't in the session, they are not logged in.
+    # Send them to the login page.
+    if not user_id:
+        return redirect('choose_access')
+
+    # THE FIX: Find the user by their unique ID.
+    user = get_object_or_404(GuestUser, id=user_id)
+    
+    # NOW you have the correct user object, and you can access their progress.
+    # For example, to send them to the right challenge:
+    # return redirect('challenge_page', challenge_number=user.current_challenge)
+
+    # For now, we'll just render the dashboard with the user's info.
+    return render(request, 'core/user_dashboard.html', {'user': user})
+
 def challenge_entry(request):
     if request.user.is_authenticated:
-        return redirect('challenge_list') 
-    return render(request, 'choose_access.html') 
+        return redirect('challenge_list')
+    return render(request, 'core/challenge_entry.html')
+ 
 
 
-def challenge_detail(request, lang_slug, challenge_slug):
+def challenge_detail(request, lang_slug, challenge_slug, challenge_id):
      
     challenge = get_object_or_404(
-        CodeChallenge,
+        CodeChallenge, id=challenge_id,
         language__slug=lang_slug,
-        slug=challenge_slug
+        slug=challenge_slug,
     )
     if request.method == 'POST':
         pass 
@@ -56,6 +99,16 @@ def challenge_detail(request, lang_slug, challenge_slug):
 
 def challenge_list(request):
     """Displays a list of available challenges."""
+    user = None
+    user_id = request.session.get('guest_user_id')
+    if user_id:
+        try:
+            # This line re-assigns the 'user' variable if a user is found.
+            user = GuestUser.objects.get(id=user_id) 
+        except GuestUser.DoesNotExist:
+            # If the ID is bad, the 'user' variable just remains None.
+            pass
+
     guest_name = request.session.get('guest_name')  # Get user's name from session
 
     challenges = CodeChallenge.objects.all()
@@ -76,7 +129,8 @@ def challenge_list(request):
         'tags': tags,
         'selected_language': lang_filter,
         'selected_tag': tag_filter,
-        'guest_name': guest_name,  # Add guest name to context
+        'guest_name': guest_name,
+        'user': user,
     }
     return render(request, 'core/challenge_list.html', context)
 

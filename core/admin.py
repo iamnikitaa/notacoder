@@ -1,7 +1,6 @@
-# core/admin.py
-
 from django.contrib import admin
 from .models import CodeChallenge, ProgrammingLanguage, Tag
+from .models import GuestUser
 
 @admin.register(ProgrammingLanguage)
 class ProgrammingLanguageAdmin(admin.ModelAdmin):

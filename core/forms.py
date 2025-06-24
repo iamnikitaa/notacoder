@@ -1,16 +1,9 @@
 from django import forms
 from .models import GuestUser
 
-class GuestUserForm(forms.ModelForm):
-    class Meta:
-        model = GuestUser
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter your name to start'
-            })
-        }
+class GuestUserForm(forms.Form):
+    name = forms.CharField(max_length=100, label="Your Name")
+    magic_word = forms.CharField(max_length=100, label="Your Secret Magic Word")
         
 class ChallengeSubmissionForm(forms.Form):
     # We will add fields dynamically in __init__
