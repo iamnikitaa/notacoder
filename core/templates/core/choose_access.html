@@ -1,23 +1,33 @@
 {% extends "core/index.html" %}
 
-{% block title %}Join as Guest - notacoder{% endblock %}
+{% block title %}notacoder ✨ Join as Guest{% endblock %}
 
 {% block content %}
-<body>
-    <h1>Enter Your Name & Magic Word</h1>
+<div class="guest-entry-wrapper">
+    <div class="guest-entry-content">
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <div class="left-section">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="message {{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enter</button>
-    </form>
-</body>
+        <div class="right-section">
+            <h1 class="headline">👀 Who dis? Drop your name + magic word</h1>
+            <form method="post" class="guest-form">
+                {% csrf_token %}
+                <div class="form-fields">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="submit-btn">✨ Let me in ✨</button>
+            </form>
+            <p class="form-footer">No account. No stress. Just vibes 🖥️</p>
+        </div>
+
+    </div>
+</div>
 {% endblock %}

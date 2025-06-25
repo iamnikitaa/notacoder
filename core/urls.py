@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     
     # User signs in here
-    path('sign-in/', views.choose_access, name='choose_access'),
+    path('sign-in/', views.login_view, name='login'),
     
     # Once signed in, they see list of challenges
     path('challenges/', views.challenge_list, name='challenge_list'),
@@ -16,8 +16,6 @@ urlpatterns = [
     
     # Optional entry point or intro to challenges
     path('challenge-entry/', views.challenge_entry, name='challenge_entry'),
-
-    path('dashboard/', views.user_dashboard, name='user_dashboard'),
 
     # --- DELETE THE LINE BELOW ---
     # path('challenge/<int:challenge_number>/', views.challenge_page_view, name='challenge_page'), # REMOVED

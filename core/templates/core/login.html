@@ -1,0 +1,36 @@
+{% comment %} In your login.html file {% endcomment %}
+{% load static %} {# Ensures the static tag works #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - notacoder</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+
+{% comment %} Add the "login-page" class to the body! {% endcomment %}
+<body class="login-page">
+  <div class="page-container">
+    <div class="login-container">
+      <h1>
+        <span role="img" aria-label="eyes emoji">👀</span> 
+        WHO DIS?
+      </h1>
+
+      <form method="post" class="login-form">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">Your Name:</label>
+        {{ form.name }}
+
+        <label for="{{ form.magic_word.id_for_label }}">Your Secret Magic Word:</label>
+        {{ form.magic_word }}
+
+        <button type="submit">✨ Let me in ✨</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+{% comment %} Add your custom CSS in core/style.css {% endcomment %}

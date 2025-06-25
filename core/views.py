@@ -15,9 +15,14 @@ def index(request):
     }
     return render(request, 'core/index.html', context)
 
-def choose_access(request):
-    # ... (the start of your view remains the same) ...
+# core/views.py
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import GuestUserForm
+from .models import GuestUser
+
+def login_view(request): # <--- RENAMED HERE
     if request.method == 'POST':
         form = GuestUserForm(request.POST)
         if form.is_valid():
@@ -25,56 +30,32 @@ def choose_access(request):
             magic_word = form.cleaned_data['magic_word']
 
             try:
-                user = GuestUser.objects.get(name=name)
+                user = GuestUser.objects.get(name__iexact=name) # Using iexact is good for case-insensitive names
                 if user.magic_word == magic_word:
                     # SUCCESSFUL LOGIN
                     request.session['guest_user_id'] = user.id
                     messages.success(request, f"Welcome back, {user.name}!")
-                    
-                    # *** THE FIX IS HERE ***
-                    # Redirect to the 'challenge_detail' URL, passing 'challenge_id'.
                     return redirect('challenge_list')
                 else:
                     # FAILED LOGIN
                     messages.error(request, "That's not the right Magic Word for that name.")
-                    return redirect('choose_access')
+                    return redirect('login') # <--- UPDATED REDIRECT
 
             except GuestUser.DoesNotExist:
                 # NEW USER SIGN UP
                 user = GuestUser.objects.create(
                     name=name,
-                    magic_word=magic_word,
-                    current_challenge=1
+                    magic_word=magic_word
                 )
                 request.session['guest_user_id'] = user.id
-
-                # *** THE FIX IS HERE TOO ***
-                # Redirect to the 'challenge_detail' URL, passing 'challenge_id'.
+                messages.success(request, f"Welcome, {user.name}! Your account is created.")
                 return redirect('challenge_list')
     else:
         form = GuestUserForm()
 
-    return render(request, 'core/choose_access.html', {'form': form})
+    return render(request, 'core/login.html', {'form': form}) # <--- UPDATED TEMPLATE NAME
 
 
-def user_dashboard(request):
-    # THE FIX: Get the correct key from the session.
-    user_id = request.session.get('guest_user_id')
-    
-    # If the user ID isn't in the session, they are not logged in.
-    # Send them to the login page.
-    if not user_id:
-        return redirect('choose_access')
-
-    # THE FIX: Find the user by their unique ID.
-    user = get_object_or_404(GuestUser, id=user_id)
-    
-    # NOW you have the correct user object, and you can access their progress.
-    # For example, to send them to the right challenge:
-    # return redirect('challenge_page', challenge_number=user.current_challenge)
-
-    # For now, we'll just render the dashboard with the user's info.
-    return render(request, 'core/user_dashboard.html', {'user': user})
 
 def challenge_entry(request):
     if request.user.is_authenticated:
@@ -83,12 +64,10 @@ def challenge_entry(request):
  
 
 
-def challenge_detail(request, lang_slug, challenge_slug, challenge_id):
+def challenge_detail(request, challenge_id):
      
     challenge = get_object_or_404(
         CodeChallenge, id=challenge_id,
-        language__slug=lang_slug,
-        slug=challenge_slug,
     )
     if request.method == 'POST':
         pass 
@@ -136,12 +115,10 @@ def challenge_list(request):
 
 
 # @login_required
-def challenge_detail(request, lang_slug, challenge_slug):
+def challenge_detail(request, challenge_id):
     """Displays a single challenge and handles submission."""
     challenge = get_object_or_404(
-        CodeChallenge,
-        language__slug=lang_slug,
-        slug=challenge_slug
+        CodeChallenge, id=challenge_id,
     )
     num_blanks = challenge.get_number_of_blanks()
     has_submitted = False

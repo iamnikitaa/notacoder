@@ -2,10 +2,8 @@
 /*         GOOGLE FONTS & VARIABLES        */
 /* ======================================= */
 
-/* --- Import Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Bangers&display=swap');
 
-/* --- Define Pastel Variables --- */
 :root {
     --pastel-light-blue: #b9cbe0d0;
     --pastel-purple: #a58acb;
@@ -16,13 +14,16 @@
     --text-color: #000000;
     --button-hover-color: #a58acb;
 
+    /* Spacing variable for consistent page padding */
+    --main-padding: 2rem 4rem;
+
     --font-heading: 'Bangers', sans-serif;
     --font-body: 'Poppins', sans-serif;
     --font-code: 'Courier New', Courier, monospace;
 }
 
 /* ======================================= */
-/*              BASE STYLING              */
+/*              BASE & LAYOUT             */
 /* ======================================= */
 
 body {
@@ -30,42 +31,72 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     margin: 0;
-    padding: 0 0 2rem 0;
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    font-size: 24px;
-    overflow-y: auto !important;
+    min-height: 100vh;
+    font-size: 18px; /* Adjusted for better overall scaling */
+    overflow-y: auto;
 }
 
 main {
-    flex-grow: 1;
-    position: relative;
-    z-index: 2;
+    flex-grow: 1; /* Pushes footer down */
+    width: 100%;
+    padding: var(--main-padding);
+    box-sizing: border-box;
 }
+
+/* ======================================= */
+/*        HEADER & FOOTER SECTIONS        */
+/* ======================================= */
+
+header {
+    padding: 1.5rem var(--main-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem; /* Match the main padding's left/right */
+}
+
+.site-logo {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+footer {
+    background-color: var(--pastel-purple);
+    color: #fff;
+    padding: 1.5rem;
+    text-align: center;
+    font-family: var(--font-body);
+}
+
+/* ======================================= */
+/*           TYPOGRAPHY & BUTTONS         */
+/* ======================================= */
 
 h1, h2, h3, h4, h5 {
     font-family: var(--font-heading);
     color: var(--pastel-purple);
-    margin: 10px 0;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 p, a {
     font-family: var(--font-body);
     color: var(--text-color);
-    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
-a {
-    text-decoration: none;
-    color: var(--pastel-pink);
-}
-
-a:hover {
-    color: var(--pastel-cyan);
-}
+a { text-decoration: none; color: var(--pastel-pink); }
+a:hover { color: var(--pastel-cyan); }
 
 button, .btn {
     background-color: var(--pastel-pink);
@@ -79,62 +110,7 @@ button, .btn {
     font-size: 1.1rem;
 }
 
-button:hover, .btn:hover {
-    background-color: var(--button-hover-color);
-}
-
-.container, .container-fluid {
-    position: relative;
-    z-index: 2;
-}
-
-/* ======================================= */
-/*              CODE & FORMS              */
-/* ======================================= */
-
-code, pre {
-    background-color: #f8f9fa;
-    font-family: var(--font-code);
-    border-radius: 5px;
-    padding: 1rem;
-    color: var(--text-color);
-    font-size: 0.9rem;
-}
-
-code {
-    padding: 5px 10px;
-}
-
-.form-control {
-    font-family: var(--font-code);
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.form-label {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-/* ======================================= */
-/*             FOOTER SECTION             */
-/* ======================================= */
-
-footer {
-    background-color: var(--pastel-purple);
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    font-family: var(--font-body);
-    position: relative;
-    z-index: 2;
-}
+button:hover, .btn:hover { background-color: var(--button-hover-color); }
 
 /* ======================================= */
 /*         CHALLENGE LIST PAGE            */
@@ -143,78 +119,36 @@ footer {
 .list-group {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
 }
 
 .list-group-item {
+    background: #fff;
     font-size: 1.2rem;
     margin-bottom: 15px;
     border-radius: 10px !important;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.challenge-content {
+    padding: 1.5rem;
     text-align: center;
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-h5.mb-1 {
-    font-size: 1.5rem;
-}
-
-p.mb-1 {
-    font-size: 1.2rem;
-}
-
-.badge {
-    font-size: 1rem;
-    padding: 8px 12px;
 }
 
 /* ======================================= */
 /*         CHALLENGE DETAIL PAGE          */
 /* ======================================= */
 
-.challenge-detail {
-    max-width: none;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.challenge-detail > * {
-    margin-bottom: 2rem;
-}
-
 .challenge-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 20px;
-}
-
-.challenge-form-section,
-.challenge-result-section,
-.challenge-explanation-section {
-    flex: 1;
-    min-width: 0;
-}
-
-.card,
-.alert-success {
-    height: 100%;
-    margin-bottom: 0;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .card {
+    background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .card-header {
@@ -222,98 +156,72 @@ p.mb-1 {
     color: white;
     font-size: 1.3rem;
     padding: 15px 20px;
-    border-radius: 10px 10px 0 0 !important;
+    border-radius: 10px 10px 0 0;
     font-weight: 500;
 }
 
 .card-body {
     padding: 1.5rem;
-    overflow-y: auto;
-    max-height: calc(100vh - 300px);
+    flex-grow: 1;
 }
 
-.code-block {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    margin: 15px 0;
-}
-
-/* ======================================= */
-/*         ALERTS & FEEDBACK BLOCKS       */
-/* ======================================= */
-
-.alert-success {
-    background-color: var(--pastel-cyan);
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-top: 2rem;
-    padding: 25px;
+code, pre {
+    background-color: #f0f2f5;
+    font-family: var(--font-code);
+    border-radius: 5px;
+    padding: 1rem;
     color: var(--text-color);
-    overflow-y: auto;
-    max-height: calc(100vh - 200px);
-}
-
-.alert-success h3,
-.alert-success h4 {
-    color: var(--pastel-purple);
-    margin-top: 1.5rem;
-}
-
-.alert-success pre {
-    margin: 1rem 0;
-}
-
-.alert-success .code-block {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 /* ======================================= */
-/*            SIGN-IN PAGE STYLES         */
+/*               LOGIN PAGE               */
 /* ======================================= */
 
-body.signin-page {
+/* This class on the body tag triggers the special layout */
+body.login-page {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Override main padding for login page to allow true centering */
+body.login-page main {
+    padding: 1rem; /* Small padding for small screens */
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    min-height: 100vh;
 }
 
-.signin-container {
+.login-container {
     max-width: 450px;
     width: 100%;
-    padding: 2rem;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: var(--pastel-cyan);
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.signin-container h1 {
-    font-family: var(--font-heading);
-    color: var(--pastel-purple);
+.login-container h1 {
     font-size: 2.8rem;
-    letter-spacing: 2px;
-    margin-bottom: 3rem;
-    line-height: 1.2;
+    margin-bottom: 2.5rem;
 }
 
-.signin-form p {
+.login-form p {
     margin-bottom: 1.5rem;
     text-align: left;
 }
 
-.signin-form label {
+.login-form label {
     display: block;
     margin-bottom: 0.5rem;
-    font-family: var(--font-body);
     font-weight: 400;
-    font-size: 1rem;
-    color: var(--text-color);
 }
 
-.signin-form input {
+.login-form input {
     width: 100%;
     padding: 12px;
     border: 2px solid var(--pastel-purple);
@@ -323,74 +231,20 @@ body.signin-page {
     box-sizing: border-box;
 }
 
-.signin-form input:focus {
+.login-form input:focus {
     outline: none;
     border-color: var(--pastel-pink);
     box-shadow: 0 0 5px var(--pastel-purple);
 }
 
-.signin-form button {
+.login-form button {
     width: 100%;
     margin-top: 1rem;
-    padding: 15px;
-    font-size: 1.2rem;
     font-weight: 600;
 }
 
-.signin-box {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-/* ======================================= */
-/*               DASHBOARD                */
-/* ======================================= */
-
-.dashboard {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-/* ======================================= */
-/*          LOGO & MESSAGES SIDEBAR       */
-/* ======================================= */
-
-.site-logo {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    text-decoration: none;
-}
-
-.messages-sidebar {
-    position: absolute;
-    top: 5rem;
-    left: 2rem;
-    text-align: left;
-}
-
-.messages-sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.messages-sidebar .message-item {
-    font-size: 1.1rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 10px 15px;
-    border-radius: 5px;
-    border-left: 4px solid var(--pastel-purple);
+.login-footer-text {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #555;
 }

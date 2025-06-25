@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class GuestUser(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    magic_word = models.CharField(max_length=100) # This will be the "password"
+    magic_word = models.CharField(max_length=100)  # This will be the "password"
     current_challenge = models.IntegerField(default=1)
 
     def __str__(self):
@@ -38,21 +38,20 @@ class Tag(models.Model):
 
 
 class CodeChallenge(models.Model):
-    PLACEHOLDER = "___"
-    MIN_PLACEHOLDER_LENGTH = 3
-
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True, max_length=220,
-                            help_text="URL-friendly version of the title, auto-generated.")
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
+        max_length=220,
+        help_text="URL-friendly version of the title, auto-generated."
+    )
     description = models.TextField(blank=True, help_text="Instructions and context for the user.")
+    code_template = models.TextField()
     language = models.ForeignKey(
         ProgrammingLanguage,
         on_delete=models.PROTECT,
         related_name='challenges',
         help_text="The programming language of the code snippet."
-    )
-    code_template = models.TextField(
-        help_text="The code snippet containing placeholders like '___' for the user to fill."
     )
     correct_answers_list = models.JSONField(
         default=list,
@@ -86,37 +85,20 @@ class CodeChallenge(models.Model):
             return '#'
 
     def clean(self):
-        from django.core.exceptions import ValidationError
-
-        if self.PLACEHOLDER not in self.code_template:
-            raise ValidationError({
-                'code_template': f'Template must contain at least one placeholder ({self.PLACEHOLDER})'
-            })
-
-        similar_placeholders = {'__', '____'}
-        for wrong in similar_placeholders:
-            if wrong in self.code_template:
-                raise ValidationError({
-                    'code_template': f'Invalid placeholder found: {wrong}. Use {self.PLACEHOLDER}'
-                })
+        # No placeholder validation needed anymore
+        pass
 
     def get_number_of_blanks(self) -> int:
-        return self.code_template.count(self.PLACEHOLDER)
+        return len(self.correct_answers_list)
 
     def construct_full_code(self, submitted_answers: list[str]) -> str | None:
-        if len(submitted_answers) != self.get_number_of_blanks():
+        if len(submitted_answers) != len(self.correct_answers_list):
             return None
-
-        filled_code = self.code_template
-        for answer in submitted_answers:
-            filled_code = filled_code.replace(self.PLACEHOLDER, answer, 1)
-
-        return filled_code
+        return self.code_template
 
     def check_submission(self, submitted_answers: list[str]) -> bool:
         if len(submitted_answers) != len(self.correct_answers_list):
             return False
-
         return all(
             submitted.strip() == correct.strip()
             for submitted, correct in zip(submitted_answers, self.correct_answers_list)
