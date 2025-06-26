@@ -13,8 +13,6 @@
     --pastel-cyan: #ffffff;
     --text-color: #000000;
     --button-hover-color: #a58acb;
-
-    /* Spacing variable for consistent page padding */
     --main-padding: 2rem 4rem;
 
     --font-heading: 'Bangers', sans-serif;
@@ -35,12 +33,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-size: 18px; /* Adjusted for better overall scaling */
+    font-size: 18px; 
     overflow-y: auto;
 }
 
 main {
-    flex-grow: 1; /* Pushes footer down */
+    flex-grow: 1;
     width: 100%;
     padding: var(--main-padding);
     box-sizing: border-box;
@@ -55,7 +53,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 4rem; /* Match the main padding's left/right */
+    padding: 1rem 4rem; 
 }
 
 .site-logo {
@@ -179,16 +177,13 @@ code, pre {
 /* ======================================= */
 /*               LOGIN PAGE               */
 /* ======================================= */
-
-/* This class on the body tag triggers the special layout */
 body.login-page {
     justify-content: center;
     align-items: center;
 }
 
-/* Override main padding for login page to allow true centering */
 body.login-page main {
-    padding: 1rem; /* Small padding for small screens */
+    padding: 1rem; 
     display: flex;
     justify-content: center;
     align-items: center;

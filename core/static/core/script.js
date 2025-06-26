@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Custom script.js loaded successfully!');
-
-    // Check for any success messages
     const messages = document.querySelectorAll('.message');
 
     messages.forEach(msg => {
@@ -16,14 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-
-    // Optional: Form handling (currently does nothing)
     const challengeForm = document.getElementById('challenge-submission-form');
     if (challengeForm) {
         challengeForm.addEventListener('submit', function (event) {
             event.preventDefault(); 
             console.log('Challenge form submitted!'); 
-            // You could handle AJAX submission here if needed
         });
     }
 });

@@ -15,14 +15,12 @@ def index(request):
     }
     return render(request, 'core/index.html', context)
 
-# core/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import GuestUserForm
 from .models import GuestUser
 
-def login_view(request): # <--- RENAMED HERE
+def login_view(request):
     if request.method == 'POST':
         form = GuestUserForm(request.POST)
         if form.is_valid():
@@ -30,19 +28,16 @@ def login_view(request): # <--- RENAMED HERE
             magic_word = form.cleaned_data['magic_word']
 
             try:
-                user = GuestUser.objects.get(name__iexact=name) # Using iexact is good for case-insensitive names
+                user = GuestUser.objects.get(name__iexact=name)
                 if user.magic_word == magic_word:
-                    # SUCCESSFUL LOGIN
                     request.session['guest_user_id'] = user.id
                     messages.success(request, f"Welcome back, {user.name}!")
                     return redirect('challenge_list')
                 else:
-                    # FAILED LOGIN
                     messages.error(request, "That's not the right Magic Word for that name.")
-                    return redirect('login') # <--- UPDATED REDIRECT
+                    return redirect('login')
 
             except GuestUser.DoesNotExist:
-                # NEW USER SIGN UP
                 user = GuestUser.objects.create(
                     name=name,
                     magic_word=magic_word
@@ -53,7 +48,7 @@ def login_view(request): # <--- RENAMED HERE
     else:
         form = GuestUserForm()
 
-    return render(request, 'core/login.html', {'form': form}) # <--- UPDATED TEMPLATE NAME
+    return render(request, 'core/login.html', {'form': form}) 
 
 
 
@@ -82,13 +77,11 @@ def challenge_list(request):
     user_id = request.session.get('guest_user_id')
     if user_id:
         try:
-            # This line re-assigns the 'user' variable if a user is found.
             user = GuestUser.objects.get(id=user_id) 
         except GuestUser.DoesNotExist:
-            # If the ID is bad, the 'user' variable just remains None.
             pass
 
-    guest_name = request.session.get('guest_name')  # Get user's name from session
+    guest_name = request.session.get('guest_name')
 
     challenges = CodeChallenge.objects.all()
     languages = ProgrammingLanguage.objects.all()
@@ -113,8 +106,6 @@ def challenge_list(request):
     }
     return render(request, 'core/challenge_list.html', context)
 
-
-# @login_required
 def challenge_detail(request, challenge_id):
     """Displays a single challenge and handles submission."""
     challenge = get_object_or_404(

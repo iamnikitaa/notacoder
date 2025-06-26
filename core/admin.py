@@ -18,7 +18,7 @@ class CodeChallengeAdmin(admin.ModelAdmin):
     list_filter = ('language', 'difficulty', 'tags', 'created_at')
     search_fields = ('title', 'description', 'code_template')
     prepopulated_fields = {'slug': ('title',)}
-    filter_horizontal = ('tags',) # Makes selecting tags much nicer
+    filter_horizontal = ('tags',)
 
     fieldsets = (
         (None, {
@@ -31,7 +31,3 @@ class CodeChallengeAdmin(admin.ModelAdmin):
             'fields': ('difficulty', 'points_reward', 'tags')
         }),
     )
-
-    # Note: The 'correct_answers_list' (JSONField) will appear as a simple
-    # text box in the admin. Ensure you enter valid JSON lists like:
-    # ["answer1", "answer 2 with spaces", "another_answer"]

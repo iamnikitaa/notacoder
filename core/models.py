@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class GuestUser(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    magic_word = models.CharField(max_length=100)  # This will be the "password"
+    magic_word = models.CharField(max_length=100) 
     current_challenge = models.IntegerField(default=1)
 
     def __str__(self):
@@ -85,7 +85,6 @@ class CodeChallenge(models.Model):
             return '#'
 
     def clean(self):
-        # No placeholder validation needed anymore
         pass
 
     def get_number_of_blanks(self) -> int:
