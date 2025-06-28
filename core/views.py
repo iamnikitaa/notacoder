@@ -56,20 +56,7 @@ def challenge_entry(request):
     if request.user.is_authenticated:
         return redirect('challenge_list')
     return render(request, 'core/challenge_entry.html')
- 
 
-
-def challenge_detail(request, challenge_id):
-     
-    challenge = get_object_or_404(
-        CodeChallenge, id=challenge_id,
-    )
-    if request.method == 'POST':
-        pass 
-    else:
-         form = ChallengeSubmissionForm(num_blanks=challenge.get_number_of_blanks())
-         context = {'challenge': challenge, 'form': form}
-         return render(request, 'core/challenge_detail.html', context)
 
 def challenge_list(request):
     """Displays a list of available challenges."""
@@ -105,7 +92,6 @@ def challenge_list(request):
         'user': user,
     }
     return render(request, 'core/challenge_list.html', context)
-
 def challenge_detail(request, challenge_id):
     """Displays a single challenge and handles submission."""
     challenge = get_object_or_404(
@@ -128,13 +114,21 @@ def challenge_detail(request, challenge_id):
             if is_correct:
                 messages.success(request, f'🎉 Correct! You earned {challenge.points_reward} points!')
                 full_code = challenge.construct_full_code(submitted_answers)
+                
+                user_id = request.session.get('guest_user_id')
+                if user_id:
+                    try:
+                        user = GuestUser.objects.get(id=user_id)
+                        user.completed_challenges.add(challenge)
+                    except GuestUser.DoesNotExist:
+                        pass
             else:
                 messages.error(request, '❌ Not quite right. Try again!')
         else:
             messages.error(request, "Please fill in all the blanks.")
     else:
         form = ChallengeSubmissionForm(num_blanks=num_blanks)
-
+        
     context = {
         'challenge': challenge,
         'form': form,

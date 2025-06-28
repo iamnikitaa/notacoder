@@ -7,40 +7,39 @@
 <div class="container mt-4">
     <h1 class="text-center mb-4">Challenges</h1>
 
-    {% if guest %}
+    {% if user %}
         <div class="alert alert-info text-center" role="alert">
-            You're viewing as a guest. <a href="{% url 'login' %}">Login</a> to save your progress and earn rewards!
+            Welcome, {{ user.name }}!
+        </div>
+    {% else %}
+        <div class="alert alert-secondary text-center" role="alert">
+            You're viewing as a guest. <a href="{% url 'login' %}">Login or Sign Up</a> to save your progress!
         </div>
     {% endif %}
 
     {% if challenges %}
         <div class="list-group">
             {% for challenge in challenges %}
-                {% if guest and challenge.requires_login %}
-                    <div class="list-group-item disabled mb-3">
-                        <div class="challenge-header">
-                            <h5 class="mb-0 challenge-title text-muted">
-                                {{ challenge.title }} <small>(Login required)</small>
-                            </h5>
-                            <div class="challenge-badges">
-                                <span class="badge bg-secondary">{{ challenge.language.name }}</span>
-                                <span class="badge bg-warning text-dark">{{ challenge.get_difficulty_display }}</span>
-                                <span class="badge bg-info text-dark">{{ challenge.points_reward }} pts</span>
-                            </div>
+                {# The entire list item is a link. We add flexbox classes to align its children. #}
+                <a href="{% url 'challenge_detail' challenge.id %}" class="list-group-item list-group-item-action mb-3 d-flex justify-content-between align-items-center">
+                    
+                    {# Left side content: Title and Badges #}
+                    <div class="challenge-info">
+                        <h5 class="mb-1 challenge-title">{{ challenge.title }}</h5>
+                        <div class="challenge-badges">
+                            <span class="badge rounded-pill bg-dark">{{ challenge.language.name }}</span>
+                            <span class="badge rounded-pill bg-primary">{{ challenge.difficulty }}</span>
+                            <span class="badge rounded-pill bg-info text-dark">{{ challenge.points_reward }} pts</span>
                         </div>
                     </div>
-                {% else %}
-                    <a href="{% url 'challenge_detail' challenge.id %}" class="list-group-item list-group-item-action mb-3">
-                        <div class="challenge-header">
-                            <h5 class="mb-0 challenge-title">{{ challenge.title }}</h5>
-                            <div class="challenge-badges">
-                                <span class="badge bg-secondary">{{ challenge.language.name }}</span>
-                                <span class="badge bg-warning text-dark">{{ challenge.get_difficulty_display }}</span>
-                                <span class="badge bg-info text-dark">{{ challenge.points_reward }} pts</span>
-                            </div>
+
+                    {# Right side content: Completion Status (only shows if condition is met) #}
+                    {% if user and challenge in user.completed_challenges.all %}
+                        <div class="completion-status">
+                            ✓ Completed
                         </div>
-                    </a>
-                {% endif %}
+                    {% endif %}
+                </a>
             {% endfor %}
         </div>
     {% else %}

@@ -5,7 +5,7 @@ from .models import GuestUser
 @admin.register(ProgrammingLanguage)
 class ProgrammingLanguageAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
-    prepopulated_fields = {'slug': ('name',)} # Auto-fills slug from name
+    prepopulated_fields = {'slug': ('name',)} 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

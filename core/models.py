@@ -7,6 +7,12 @@ class GuestUser(models.Model):
     magic_word = models.CharField(max_length=100) 
     current_challenge = models.IntegerField(default=1)
 
+    completed_challenges = models.ManyToManyField(
+        'CodeChallenge',
+        related_name='solved_by_users',
+        blank=True
+    )
+
     def __str__(self):
         return f"{self.name}"
 

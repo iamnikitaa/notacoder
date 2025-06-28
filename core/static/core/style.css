@@ -1,28 +1,23 @@
-/* ======================================= */
-/*         GOOGLE FONTS & VARIABLES        */
-/* ======================================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Bangers&display=swap');
 
 :root {
-    --pastel-light-blue: #b9cbe0d0;
-    --pastel-purple: #a58acb;
-    --pastel-pink: #0b0b0b;
-    --pastel-orange: #ffc9a3;
-    --pastel-yellow: #fbe7b4;
+    --pastel-light-blue: #dde4f0;
+    --pastel-purple: #7a6a9b;
+    --pastel-pink-dark: #3a324a;
     --pastel-cyan: #ffffff;
-    --text-color: #000000;
+    --text-color: #2c2f33;
     --button-hover-color: #a58acb;
+    
     --main-padding: 2rem 4rem;
 
-    --font-heading: 'Bangers', sans-serif;
+    --font-heading: 'Bangers', cursive;
     --font-body: 'Poppins', sans-serif;
     --font-code: 'Courier New', Courier, monospace;
 }
 
-/* ======================================= */
-/*              BASE & LAYOUT             */
-/* ======================================= */
+html, body {
+    height: 100%;
+}
 
 body {
     background-color: var(--pastel-light-blue);
@@ -32,36 +27,33 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     font-size: 18px; 
-    overflow-y: auto;
+    line-height: 1.6;
 }
 
 main {
-    flex-grow: 1;
+    flex-grow: 1; 
     width: 100%;
     padding: var(--main-padding);
     box-sizing: border-box;
 }
 
-/* ======================================= */
-/*        HEADER & FOOTER SECTIONS        */
-/* ======================================= */
-
 header {
-    padding: 1.5rem var(--main-padding);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1rem 4rem; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 4rem; 
 }
 
 .site-logo {
-    font-family: var(--font-body);
+    font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.5rem;
-    color: var(--text-color);
+    font-size: 2rem;
+    color: var(--pastel-purple);
     text-decoration: none;
+    letter-spacing: 1px;
 }
 
 footer {
@@ -70,53 +62,55 @@ footer {
     padding: 1.5rem;
     text-align: center;
     font-family: var(--font-body);
+    flex-shrink: 0; 
 }
-
-/* ======================================= */
-/*           TYPOGRAPHY & BUTTONS         */
-/* ======================================= */
 
 h1, h2, h3, h4, h5 {
     font-family: var(--font-heading);
     color: var(--pastel-purple);
+    letter-spacing: 1.5px;
 }
 
 h1 {
-    font-size: 3rem;
-    margin-bottom: 30px;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
 p, a {
     font-family: var(--font-body);
     color: var(--text-color);
-    line-height: 1.6;
 }
 
-a { text-decoration: none; color: var(--pastel-pink); }
-a:hover { color: var(--pastel-cyan); }
+a {
+    text-decoration: none;
+    color: var(--pastel-purple);
+    font-weight: 600;
+}
+a:hover { color: var(--pastel-pink-dark); }
 
 button, .btn {
-    background-color: var(--pastel-pink);
+    background-color: var(--pastel-pink-dark);
     color: #fff;
     padding: 14px 28px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-family: var(--font-body);
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
     font-size: 1.1rem;
 }
 
-button:hover, .btn:hover { background-color: var(--button-hover-color); }
+button:hover, .btn:hover {
+    background-color: var(--button-hover-color);
+    transform: translateY(-2px);
+}
 
-/* ======================================= */
-/*         CHALLENGE LIST PAGE            */
-/* ======================================= */
 
 .list-group {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
 }
 
 .list-group-item {
@@ -124,42 +118,56 @@ button:hover, .btn:hover { background-color: var(--button-hover-color); }
     font-size: 1.2rem;
     margin-bottom: 15px;
     border-radius: 10px !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     padding: 1.5rem;
     text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.list-group-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
-/* ======================================= */
-/*         CHALLENGE DETAIL PAGE          */
-/* ======================================= */
 
 .challenge-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: auto auto; 
     gap: 2rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 2rem auto;
+    grid-template-areas:
+        "description form"
+        "result result";
 }
+
+.challenge-description-section { grid-area: description; }
+.challenge-form-section { grid-area: form; }
+.challenge-result-section { grid-area: result; }
+
 
 .card {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .card-header {
     background-color: var(--pastel-purple);
     color: white;
-    font-size: 1.3rem;
-    padding: 15px 20px;
-    border-radius: 10px 10px 0 0;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    padding: 15px 25px;
+    border-radius: 15px 15px 0 0;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .card-body {
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     flex-grow: 1;
 }
 
@@ -174,62 +182,65 @@ code, pre {
     word-wrap: break-word;
 }
 
-/* ======================================= */
-/*               LOGIN PAGE               */
-/* ======================================= */
 body.login-page {
-    justify-content: center;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
 }
 
 body.login-page main {
-    padding: 1rem; 
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .login-container {
     max-width: 450px;
     width: 100%;
     margin: 0 auto;
-    padding: 2.5rem;
+    padding: 3rem;
     background: var(--pastel-cyan);
     border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     text-align: center;
 }
 
 .login-container h1 {
     font-size: 2.8rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
 
-.login-form p {
-    margin-bottom: 1.5rem;
+
+.login-form {
     text-align: left;
 }
 
 .login-form label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
+    margin-bottom: 0.5rem; 
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
 }
 
-.login-form input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--pastel-purple);
-    border-radius: 5px;
-    font-family: var(--font-code);
+.login-form input[type="text"] {
+    width: 100%;   
+    margin-bottom: 1.5rem; 
+    padding: 14px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: var(--font-body);
     font-size: 1.1rem;
     box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.login-form input:focus {
+
+.login-form input[type="text"]:focus {
     outline: none;
-    border-color: var(--pastel-pink);
-    box-shadow: 0 0 5px var(--pastel-purple);
+    border-color: var(--pastel-purple);
+    box-shadow: 0 0 8px rgba(122, 106, 155, 0.4);
 }
 
 .login-form button {
@@ -242,4 +253,42 @@ body.login-page main {
     margin-top: 2rem;
     font-size: 0.9rem;
     color: #555;
+}
+
+.alert {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.form-control {
+    padding: 14px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+.challenge-info {
+    text-align: left; 
+}
+
+.challenge-title {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.completion-status {
+    color: #28a745; 
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap; 
+    padding: 0.5rem 1rem;
+    background-color: rgba(40, 167, 69, 0.1); 
+    border-radius: 50px; 
 }
