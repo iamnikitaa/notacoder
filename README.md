@@ -23,14 +23,13 @@
 
 ## Peep the Look 👀
 
-A quick look at what we're building.
+A quick look at what i'm building.
 
 #### The Login Page: Who Dis?
 
 *The entry point. Just pick a name and a magic word to get started.*
 
-`![image](https://github.com/user-attachments/assets/ac53adca-31eb-410d-9860-95e84e370443)
-`
+`![Login Page Screenshot](screenshots/login.jpg)'
 
 ---
 
