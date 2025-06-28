@@ -1,0 +1,63 @@
+# Python bytecode
+_pycache_/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media
+staticfiles
+/staticfiles/
+/media/
+/.env
+.env.*
+
+# Django migrations (optional to ignore, depending on workflow)
+/migrations/.py
+/migrations/.pyc
+!/migrations/_init_.py
+
+# Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Pytest
+.cache/
+pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Sentry config (if used)
+.sentryclirc
