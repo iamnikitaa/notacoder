@@ -31,7 +31,7 @@ You get bite-sized challenges where you fill in the blanks, hit submit, and mayb
 
 Minimal setup. Name and magic word. That’s it.
 
-`![Login Page Screenshot](screenshots/login.jpg)`
+![Login Page Screenshot](screenshots/login.jpg)
 
 ---
 
@@ -39,7 +39,7 @@ Minimal setup. Name and magic word. That’s it.
 
 A scrollable list of challenges. You’ll see what you’ve finished, and what’s waiting.
 
-`![Challenge List Screenshot](screenshots/list.jpg)`
+![Challenge List Screenshot](screenshots/list.jpg)
 
 ---
 
@@ -47,7 +47,7 @@ A scrollable list of challenges. You’ll see what you’ve finished, and what�
 
 Each challenge gives you a little problem. You fill in the missing code. That’s the game.
 
-`![Challenge Detail Screenshot](screenshots/detail.jpg)`
+![Challenge Detail Screenshot](screenshots/detail.jpg)
 
 ---
 
