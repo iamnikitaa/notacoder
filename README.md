@@ -37,8 +37,7 @@ A quick look at what i'm building.
 
 *Your dashboard of quests. Completed challenges get a nice little checkmark so you know what you've conquered.*
 
-`![image](https://github.com/user-attachments/assets/356f9954-7735-4b38-bf87-21cf1e667080)
-`
+`![Challenge List Screenshot](screenshots/list.jpg)`
 
 ---
 
@@ -46,8 +45,7 @@ A quick look at what i'm building.
 
 *This is where the magic happens. Read the description, fill in the blanks, and smash that submit button.*
 
-`![image](https://github.com/user-attachments/assets/9ba42bbd-9329-43e0-9f89-4cdcba74ca07)
-`
+`![Challenge Detail Screenshot](screenshots/detail.jpg)`
 
 ---
 
