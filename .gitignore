@@ -61,3 +61,16 @@ dist/
 
 # Sentry config (if used)
 .sentryclirc
+
+# ... all the other stuff ...
+
+# Django
+# -------------------------------------------------------------------
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+media/
+.env
+
+# Custom local settings
+config/local_settings.py 
