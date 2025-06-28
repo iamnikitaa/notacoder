@@ -66,8 +66,8 @@ Wanna try it out on your machine? Here’s how:
 
 1. **Clone the repo:**
     ```bash
-    git clone https://github.com/your-github-username/iamnikitaa-notacoder.git
-    cd iamnikitaa-notacoder
+    git clone https://github.com/iamnikitaa/notacoder.git
+    cd notacoder
     ```
 
 2. **Set up a virtual environment:**
