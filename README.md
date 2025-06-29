@@ -1,115 +1,117 @@
-# notacoder 🐙
-
 <p align="center">
   <img src="https://img.shields.io/badge/status-under%20construction%20🚧-yellow?style=for-the-badge" alt="Status: Under Construction">
   <img src="https://img.shields.io/badge/python-3.12-blue?style=for-the-badge&logo=python" alt="Python 3.12">
   <img src="https://img.shields.io/badge/django-5.1-092E20?style=for-the-badge&logo=django" alt="Django 5.1">
 </p>
 
-> "We don’t do boring syntax lectures here. Just you, some missing code, and the mild existential crisis that comes with debugging."
+> "No lectures. No pressure. Just code, chaos, and a little bit of progress."
 
-**notacoder** is a vibe. It's a hands-on, fill-in-the-blank coding playground built with Django, designed for beginners who want to learn Python without the yawn-inducing theory. The goal is to build logic and confidence, one challenge at a time. Slay your first `print()` statement and level up from there.
+## notacoder 🐙
 
-**⚠️ Heads up:** This project is a major work-in-progress. Things might break, look weird, or randomly change. It's all part of the process. ✨
+**notacoder** is a chill little coding playground built with Django. It’s for beginners who want to learn Python without sitting through hours of theory videos or pretending to understand what recursion is on day one.
 
-## The Vibe (Features)
+You get bite-sized challenges where you fill in the blanks, hit submit, and maybe celebrate with some confetti. It’s simple, low-stress, and kind of fun (once the code runs).
 
-*   **🧠 Learn by Doing:** Progressive, fill-in-the-blank challenges that guide you from "Hello, World!" to understanding classes.
-*   **🎮 Gamified Progression:** Earn points for each correct solution and track your completed challenges.
-*   **💅 Guest Mode:** Hop in and try challenges without an account. Create a "guest user" with just a name and a magic word to save your progress.
-*   **✨ Confetti Confirmed:** Get that sweet, sweet confetti validation when you get an answer right. Because you deserve it.
+**Disclaimer:** This project is under construction. Things might look odd, break randomly, or disappear. That’s life. We move.
 
 ---
 
-## Peep the Look 👀
+## Features
 
-A quick look at what i'm building.
-
-#### The Login Page: Who Dis?
-
-*The entry point. Just pick a name and a magic word to get started.*
-
-`![Login Page Screenshot](screenshots/login.jpg)'
+- **Learn by Doing:** Skip the 50-slide intro. Just open a challenge and start typing.
+- **Points & Progress:** Get points for solving stuff. Feels good.
+- **Guest Mode:** No sign-ups, no emails, no passwords. Just jump in.
+- **Confetti? Yes:** Correct answers get sparkles. Because why not.
 
 ---
 
-#### The Challenge List: Choose Your Fighter
+## Screenshots
 
-*Your dashboard of quests. Completed challenges get a nice little checkmark so you know what you've conquered.*
+### Login Page: Just say who you are
 
-`![Challenge List Screenshot](screenshots/list.jpg)`
+Minimal setup. Name and magic word. That’s it.
 
----
-
-#### The Challenge Detail: The Main Event
-
-*This is where the magic happens. Read the description, fill in the blanks, and smash that submit button.*
-
-`![Challenge Detail Screenshot](screenshots/detail.jpg)`
+![Login Page Screenshot](screenshots/login.jpg)
 
 ---
 
-## Tech Stack & Setup
+### Challenge List: Your to-do (but more fun)
 
-This project is built on a simple but powerful stack.
+A scrollable list of challenges. You’ll see what you’ve finished, and what’s waiting.
 
-*   **Backend:** Python 3.12, Django 5.1
-*   **Database:** SQLite3 (perfect for development and simple hosting)
-*   **Frontend:** HTML, CSS, a sprinkle of JavaScript
-*   **Frameworks/Libs:** Bootstrap 5 (for layout), Confetti.js (for the vibes)
+![Challenge List Screenshot](screenshots/list.jpg)
 
-### Getting it Running Locally
+---
 
-Wanna run this on your own machine? Bet.
+### Challenge Detail: Where the code happens
 
-1.  **Clone the repo:**
+Each challenge gives you a little problem. You fill in the missing code. That’s the game.
+
+![Challenge Detail Screenshot](screenshots/detail.jpg)
+
+---
+
+## Tech Stack
+
+- **Backend:** Python 3.12, Django 5.1  
+- **Database:** SQLite3 (yes, the classic)  
+- **Frontend:** HTML, CSS, some JavaScript  
+- **Extras:** Bootstrap 5, Confetti.js for celebrations
+
+---
+
+## Local Setup
+
+Wanna try it out on your machine? Here’s how:
+
+1. **Clone the repo:**
     ```bash
-    git clone https://github.com/your-github-username/iamnikitaa-notacoder.git
-    cd iamnikitaa-notacoder
+    git clone https://github.com/iamnikitaa/notacoder.git
+    cd notacoder
     ```
 
-2.  **Set up a virtual environment (you should, for real):**
+2. **Set up a virtual environment:**
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    source venv/bin/activate  # Windows: venv\Scripts\activate
     ```
 
-3.  **Install the good stuff:**
+3. **Install requirements:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Run the migrations to set up your database:**
+4. **Run migrations:**
     ```bash
     python manage.py migrate
     ```
 
-5.  **Populate the database with the starter challenges:**
+5. **Add the starter challenges:**
     ```bash
     python manage.py add_challenges
     ```
 
-6.  **Fire up the server:**
+6. **Start the server:**
     ```bash
     python manage.py runserver
     ```
 
-    Now you can open your browser and go to `http://127.0.0.1:8000` to see the site live.
+Now open your browser and go to `http://127.0.0.1:8000`
 
 ---
 
-## The Roadmap (aka The To-Do List)
+## Roadmap
 
-This is what's on the vision board for the future. No promises on timelines. ✌️
+Things that may or may not happen soon:
 
-*   [ ] More advanced challenge topics (APIs, file handling).
-*   [ ] A real user profile page to see stats.
-*   [ ] Leaderboard to see who's slaying the most.
-*   [ ] Prettier UI animations and transitions.
-*   [ ] The ability to filter challenges by difficulty or topic.
+- [ ] Add more topics (like APIs, file stuff, maybe a surprise or two)
+- [ ] Profiles with stats
+- [ ] Leaderboard (because why not)
+- [ ] UI glow-up
+- [ ] Filters for challenge type/difficulty
 
 ---
 
 <p align="center">
-  Built with 💖 and a lot of `print("is this working?")`.
+  Built with Python, caffeine, and the occasional “why isn’t this working?”
 </p>
