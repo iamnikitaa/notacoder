@@ -292,3 +292,38 @@ body.login-page main {
     background-color: rgba(40, 167, 69, 0.1); 
     border-radius: 50px; 
 }
+/* ... (keep all your existing CSS) ... */
+
+/* ======================================= */
+/*        NEXT CHALLENGE BUTTON & MSG     */
+/* ======================================= */
+
+.next-challenge-container {
+    padding: 1.5rem;
+    border-top: 2px dashed #e0e0e0;
+}
+
+.all-challenges-complete h3 {
+    font-family: var(--font-display);
+    color: var(--pastel-purple);
+    font-size: 2rem;
+}
+
+.all-challenges-complete p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+/* Optional: Style the success button to be more vibrant */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 12px 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}

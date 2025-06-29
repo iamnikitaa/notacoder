@@ -1,4 +1,4 @@
-{% extends "core/index.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}{{ challenge.title }}{% endblock %}
@@ -14,6 +14,7 @@
     </div>
 
     <div class="challenge-container">
+        <!-- Panel 1: Challenge Description -->
         <div class="challenge-description-section">
             <div class="card">
                 <div class="card-header">Description</div>
@@ -23,11 +24,14 @@
             </div>
         </div>
 
+        <!-- Panel 2: Challenge Form -->
         <div class="challenge-form-section">
             <div class="card">
                 <div class="card-header">Your Solution</div>
                 <div class="card-body">
+                    <p>Fill in the blanks (___) in the code below.</p>
                     <pre><code>{{ challenge.code_template }}</code></pre>
+                    <hr>
                     <form method="post">
                         {% csrf_token %}
                         {% for field in form %}
@@ -41,23 +45,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Panel 3: Results Section (only appears after a submission) -->
+        {% if has_submitted %}
         <div class="challenge-result-section">
             <div class="card">
                 <div class="card-header">Results</div>
-                <div class="card-body">
-                    {% if not has_submitted %}
-                        <div class="alert alert-secondary" role="alert">
-                            No result yet... but you're about to slay this.
-                        </div>
-                    {% elif is_correct %}
+                <div class="card-body text-center">
+
+                    {% if is_correct %}
+                        {# This block shows if the answer was CORRECT #}
                         <div class="alert alert-success" role="alert">
                             🎉 Correct! You earned {{ challenge.points_reward }} points!
                         </div>
                         <div class="mt-4">
                             <h5>Completed Code:</h5>
-                            <pre><code class="language-{{ challenge.language.slug }}">{{ full_code }}</code></pre>
+                            <pre><code>{{ full_code }}</code></pre>
                         </div>
+
+                        <div class="next-challenge-container mt-4">
+                            {# THIS IS THE FIX: The 'if' statement below checks if a next challenge exists BEFORE trying to make a link. #}
+                            {% if next_challenge %}
+                                {# If a next challenge was found, show the button that links to it. #}
+                                <a href="{% url 'challenge_detail' next_challenge.id %}" class="btn btn-success btn-lg">
+                                    Next Challenge →
+                                </a>
+                            {% else %}
+                                {# If next_challenge is None, it means they finished everything. Show this message instead. #}
+                                <div class="all-challenges-complete">
+                                    <h3>You've completed all the challenges!</h3>
+                                    <p>Check back later for more. You're a rockstar! 🎸</p>
+                                    <a href="{% url 'challenge_list' %}" class="btn btn-info">Back to Challenge List</a>
+                                </div>
+                            {% endif %}
+                        </div>
+
                     {% else %}
+                        {# This block shows if the answer was INCORRECT #}
                         <div class="alert alert-danger" role="alert">
                             ❌ Not quite right. Keep trying!
                         </div>
@@ -65,25 +89,22 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
+{# This JavaScript block adds the confetti effect only on correct submissions #}
 {% if is_correct %}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        try {
-            confetti({ origin: { x: 0, y: 0 }, angle: 60, spread: 100, particleCount: 50 });
-            confetti({ origin: { x: 1, y: 0 }, angle: 120, spread: 100, particleCount: 50 });
-            confetti({ origin: { x: 0, y: 1 }, angle: -60, spread: 100, particleCount: 50 });
-            confetti({ origin: { x: 1, y: 1 }, angle: -120, spread: 100, particleCount: 50 });
-            confetti({ origin: { x: 0.5, y: 0.5 }, spread: 360, particleCount: 100 });
-        } catch (e) {
-            console.error('Confetti error:', e);
-        }
+        confetti({
+            particleCount: 150,
+            spread: 100,
+            origin: { y: 0.6 }
+        });
     });
 </script>
 {% endif %}

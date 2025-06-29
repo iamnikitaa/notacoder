@@ -122,6 +122,7 @@ def challenge_detail(request, challenge_id):
                         user.completed_challenges.add(challenge)
                     except GuestUser.DoesNotExist:
                         pass
+                next_challenge = CodeChallenge.objects.filter(id__gt=challenge.id).order_by('id').first()
             else:
                 messages.error(request, '❌ Not quite right. Try again!')
         else:
